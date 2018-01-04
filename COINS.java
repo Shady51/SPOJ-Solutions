@@ -6,8 +6,8 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
-class Main{
-    static class Reader{
+class Main {
+    static class Reader {
         private BufferedReader br;
         private StringTokenizer token;
         public Reader(InputStream obj)
