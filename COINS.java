@@ -36,7 +36,7 @@ class Main {
         hm.put(n, Math.max(n, (solve(n/2)+solve(n/3)+solve(n/4))));
         return hm.get(n);
     }
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Reader in = new Reader(System.in);
         PrintWriter out = new PrintWriter(System.out);
         String s;
