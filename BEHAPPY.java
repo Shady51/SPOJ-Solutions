@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.io.InputStream;
 import java.util.StringTokenizer;
 
-class ABC {
+class BEHAPPY {
     static class Reader
     {
         private BufferedReader br;
