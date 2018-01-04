@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -8,11 +9,11 @@ import java.util.StringTokenizer;
 class Main{
     static class Reader{
         private BufferedReader br;
-        private StringTokenizer stkz;
-        public Reader()
+        private StringTokenizer token;
+        public Reader(InputStream obj)
         {
-            stkz = null;
-            br = new BufferedReader(new InputStreamReader(System.in));
+            br = new BufferedReader(new InputStreamReader(obj));
+            token = null;
         }
         public String nextLine()
         {
@@ -36,7 +37,7 @@ class Main{
         return hm.get(n);
     }
     public static void main(String[] args) throws IOException{
-        Reader in = new Reader();
+        Reader in = new Reader(System.in);
         PrintWriter out = new PrintWriter(System.out);
         String s;
         while((s=in.nextLine())!=null){
