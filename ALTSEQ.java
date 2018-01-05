@@ -41,7 +41,7 @@ class Main{
         }
         public int nextInt(){return Integer.parseInt(next());}
     }
-    public static int longest_altenating_subsequence(int[] arr){
+    public static int longest_altenating_subsequence(int[] arr) {
         if (arr.length == 1) return 1;
         if (arr.length == 2) {
             if (Math.abs(arr[0])<Math.abs(arr[1]) && arr[1]/arr[0]<0) return 2;
@@ -68,7 +68,7 @@ class Main{
         return ans;
     }
 
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) throws IOException {
         Reader in = new Reader(System.in);
         PrintWriter out = new PrintWriter(System.out);
         out.printf("%d\n", longest_altenating_subsequence(in.nextIntArr(in.nextInt())));
