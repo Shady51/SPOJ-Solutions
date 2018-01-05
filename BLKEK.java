@@ -6,8 +6,7 @@ import java.io.InputStream;
 import java.util.StringTokenizer;
 
 class Main {
-    static class Reader
-    {
+    static class Reader {
         private BufferedReader br;
         private StringTokenizer token;
         protected Reader(InputStream obj)
