@@ -30,7 +30,7 @@ class Main {
         }
     }
     static HashMap<Long, Long> hm = new HashMap<Long, Long>();
-    public static long solve(long n){
+    public static long solve(long n) {
         if(n == 0) return 0;
         if(hm.containsKey(n)) return hm.get(n);
         hm.put(n, Math.max(n, (solve(n/2)+solve(n/3)+solve(n/4))));
