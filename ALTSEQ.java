@@ -6,9 +6,8 @@ import java.io.PrintWriter;
 import java.util.StringTokenizer;
 import java.util.Arrays;
 
-class Main{
-    static class Reader
-    {
+class Main {
+    static class Reader {
         private BufferedReader br;
         private StringTokenizer token;
         public Reader(InputStream obj) {
