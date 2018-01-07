@@ -77,7 +77,7 @@ class Main {
         Reader in = new Reader();
         PrintWriter out = new PrintWriter(System.out);
         int t = in.nextInt();
-        while (t-->0){
+        while (t-->0) {
             int N = in.nextInt();
             int K = in.nextInt();
             if (K == 0) out.printf("%d\n", 0);
@@ -86,9 +86,7 @@ class Main {
                 D = new int[m];
                 int[] price = new int[K + 1];
                 price[0] = -1;
-                for (int i = 1; i <= K; i++) {
-                    price[i] = in.nextInt();
-                }
+                for (int i = 1; i <= K; i++) price[i] = in.nextInt();
                 D[1] = price[1];
                 out.printf("%d\n", solve(price, K));
             }
