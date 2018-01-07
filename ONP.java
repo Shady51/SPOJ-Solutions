@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Stack;
 
-class Anon{
+class Main {
     static class Reader
     {
         final private int BUFFER_SIZE = 1<<26;
