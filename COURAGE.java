@@ -99,6 +99,7 @@ class SegmentTree_Sum {
         updateUTIL(0, n-1, 0, ind, val);
     }
 }
+
 class Main {
     static class Reader
     {
@@ -198,6 +199,8 @@ class Main {
         PrintWriter out = new PrintWriter(System.out);
         int n = in.nextInt();
         int[] arr = in.nextIntArr(n);
+        //Use two segment trees to calculate the minimum of values in one, and sum in the other.
+        //Or use a single segment tree of pair of values, one for sum, and the other for min of values.
         SegmentTree_Min seg_min = new SegmentTree_Min(arr, n);
         SegmentTree_Sum seg_sum = new SegmentTree_Sum(arr, n);
         int p = in.nextInt();
