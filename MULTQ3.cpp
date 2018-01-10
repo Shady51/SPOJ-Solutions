@@ -31,9 +31,9 @@ class SegmentTree {
                 }
                 lazy[sti] = 0;
             }
-            
+
             if (qs>ste || sts>qe) return;
-           
+
             if (sts>=qs && ste<=qe) {
                 int a = st[sti][0], b = st[sti][1], c = st[sti][2];
                 st[sti][1] = a; st[sti][2] = b; st[sti][0] = c;
@@ -77,7 +77,6 @@ class SegmentTree {
             st[sti][0] = constructTree(arr, sts, mid, 2*sti+1) + constructTree(arr, mid+1, ste, 2*sti+2);
             return st[sti][0];
         }
-
 };
 
 int main() {
