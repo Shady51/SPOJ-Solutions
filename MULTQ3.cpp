@@ -5,7 +5,6 @@ using namespace std;
 class SegmentTree {
     public:
         SegmentTree(int arr[], int n) {
-            
             constructTree (arr, 0, n-1, 0);
         }
         long get (int qs, int qe, int n) {
