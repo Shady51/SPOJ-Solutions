@@ -3,8 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 class Anon{
-    static class Reader
-    {
+    static class Reader {
         final private int BUFFER_SIZE = 1<<26;
         private DataInputStream din;
         private byte[] buffer;
