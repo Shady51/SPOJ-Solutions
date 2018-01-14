@@ -55,7 +55,7 @@ class Main {
                 if (arr[i]<arr[j] && lds[i] < lds[j] + 1) lds[i] = lds[j] + 1;
             }
         }
-        return lds[n-1];
+        return lds[n-1]; // to return the length of LDS, ending at the last peak.
     }
     
     public static void main(String[] args) throws IOException {
