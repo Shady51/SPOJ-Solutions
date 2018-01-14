@@ -13,8 +13,7 @@ class Main {
             br = new BufferedReader(new InputStreamReader(obj));
             token = null;
         }
-        public String next()
-        {
+        public String next() {
             while (token == null || !token.hasMoreElements())
             {
                 try
@@ -28,61 +27,12 @@ class Main {
             }
             return token.nextToken();
         }
-        public long[] nextLongArr(int n)
-        {
-            long[] arr = new long[n];
-            for(int i=0; i<n; i++){
-                arr[i] = nextLong();
-            }
-            return arr;
-        }
-        public int[] nextIntArr(int n)
-        {
-            int[] arr = new int[n];
-            for(int i=0; i<n; i++){
-                arr[i] = nextInt();
-            }
-            return arr;
-        }
-        public Integer[] nextIntegerArray(int n)
-        {
-            Integer[] arr = new Integer[n];
-            for(int i=0; i<n; i++){
-                arr[i] = nextInt();
-            }
-            return arr;
-        }
-        public Long[] nextLongArray(int n)
-        {
-            Long[] arr = new Long[n];
-            for(int i=0; i<n; i++){
-                arr[i] = nextLong();
-            }
-            return arr;
-        }
-
         public int nextInt() {return Integer.parseInt(next());}
-        public long nextLong() {return Long.parseLong(next());}
-        public double nextDouble() {return Double.parseDouble(next());}
-
-        public String nextLine()
-        {
-            String str = "";
-            try
-            {
-                str = br.readLine();
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return str;
-        }
     }
 
     static int[][] LCS;
     static int[][][] DP;
-    
+
     public static int LCS (String s1, String s2, int s1_len, int s2_len) {
         LCS = new int[s1_len+1][s2_len+1];
         for (int i=1; i<=s1_len; i++) {
@@ -101,9 +51,7 @@ class Main {
 
     public static int solve(String s1, String s2, int i, int j, int l) {
         if(l==0) return 0;
-        if(i<0 || j<0) {
-            return Integer.MIN_VALUE;
-        }
+        if(i<0 || j<0) return Integer.MIN_VALUE;
         if (DP[i][j][l] != 0) return DP[i][j][l];
         if(s1.charAt(i)==s2.charAt(j))
             DP[i][j][l] = Math.max(solve(s1,s2,i-1,j-1,l) ,solve(s1,s2,i-1,j-1,l-1)+(int)(s1.charAt(i)));
@@ -111,7 +59,7 @@ class Main {
             DP[i][j][l] = Math.max(solve(s1,s2,i,j-1,l), solve(s1,s2,i-1,j,l));
         return DP[i][j][l];
     }
-    
+
     public static void main(String[] args) throws IOException {
         Reader in = new Reader(System.in);
         PrintWriter out = new PrintWriter(System.out);
