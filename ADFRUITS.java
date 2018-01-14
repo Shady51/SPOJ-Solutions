@@ -6,12 +6,10 @@ import java.io.InputStream;
 
 class Main {
     static class Reader {
-        private BufferedReader br;
-        
+        private BufferedReader br;    
         protected Reader() {
             br = new BufferedReader(new InputStreamReader(System.in));
         }
-
         protected String nextLine() {
             String str = "";
             try {
@@ -23,6 +21,7 @@ class Main {
             return str;
         }
     }
+    
     public static String LCS (String s1, String s2, int s1_len, int s2_len) {
         int[][] lcs = new int[s1_len+1][s2_len+1];
         for (int i=1; i<=s1_len; i++) {
