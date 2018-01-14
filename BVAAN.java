@@ -37,12 +37,10 @@ class Main {
         LCS = new int[s1_len+1][s2_len+1];
         for (int i=1; i<=s1_len; i++) {
             for (int j=1; j<=s2_len; j++) {
-                if (s1.charAt(i-1) == s2.charAt(j-1)) {
+                if (s1.charAt(i-1) == s2.charAt(j-1))
                     LCS[i][j] = 1 + LCS[i-1][j-1];
-                }
-                else {
+                else 
                     LCS[i][j] = Math.max(LCS[i-1][j], LCS[i][j-1]);
-                }
             }
         }
         return LCS[s1_len][s2_len];
