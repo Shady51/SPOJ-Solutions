@@ -26,10 +26,9 @@ class Main {
     }
     
     static long[][] DP;
-    
     public static long solve (int[] arr, int ind, int sum) {
         if (sum == 0) return 0;
-        if ((sum != 0 && ind<0) || (sum<0)) return Integer.MAX_VALUE;
+        if (ind<0 || sum <0) return Integer.MAX_VALUE;
         if (DP[ind][sum] == 0) DP[ind][sum] = Math.min(1+solve(arr, ind-1, sum-arr[ind]), solve(arr, ind-1, sum));
         return DP[ind][sum];
     }
