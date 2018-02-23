@@ -52,7 +52,7 @@ class Main {
         if(i<0 || j<0) return Integer.MIN_VALUE;
         if (DP[i][j][l] != 0) return DP[i][j][l];
         if(s1.charAt(i)==s2.charAt(j))
-            DP[i][j][l] = Math.max(solve(s1,s2,i-1,j-1,l) ,solve(s1,s2,i-1,j-1,l-1)+(int)(s1.charAt(i)));
+            DP[i][j][l] = Math.max(solve(s1,s2,i-1,j-1,l), solve(s1,s2,i-1,j-1,l-1)+(int)(s1.charAt(i)));
         else
             DP[i][j][l] = Math.max(solve(s1,s2,i,j-1,l), solve(s1,s2,i-1,j,l));
         return DP[i][j][l];
