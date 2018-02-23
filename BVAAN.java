@@ -39,7 +39,7 @@ class Main {
             for (int j=1; j<=s2_len; j++) {
                 if (s1.charAt(i-1) == s2.charAt(j-1))
                     LCS[i][j] = 1 + LCS[i-1][j-1];
-                else 
+                else
                     LCS[i][j] = Math.max(LCS[i-1][j], LCS[i][j-1]);
             }
         }
@@ -48,11 +48,10 @@ class Main {
 
 
     public static int solve(String s1, String s2, int i, int j, int l) {
-        if(l==0) return 0;
-        if(i<0 || j<0) return Integer.MIN_VALUE;
+        if(i == 0 || j == 0 || l == 0) return 0;
         if (DP[i][j][l] != 0) return DP[i][j][l];
-        if(s1.charAt(i)==s2.charAt(j))
-            DP[i][j][l] = Math.max(solve(s1,s2,i-1,j-1,l), solve(s1,s2,i-1,j-1,l-1)+(int)(s1.charAt(i)));
+        if(s1.charAt(i-1) == s2.charAt(j-1))
+            DP[i][j][l] = Math.max(solve(s1,s2,i-1,j-1,l), solve(s1,s2,i-1,j-1,l-1)+(int)(s1.charAt(i-1)));
         else
             DP[i][j][l] = Math.max(solve(s1,s2,i,j-1,l), solve(s1,s2,i-1,j,l));
         return DP[i][j][l];
@@ -67,7 +66,7 @@ class Main {
             int k = in.nextInt(), s1_len = s1.length(), s2_len = s2.length(), len_LCS = LCS(s1, s2, s1_len, s2_len);
             if (len_LCS>=k) {
                 DP = new int[s1_len+1][s2_len+1][k+1];
-                out.printf("%d\n", solve(s1, s2, s1_len-1, s2_len-1, k));
+                out.printf("%d\n", solve(s1, s2, s1_len, s2_len, k));
             }
             else out.printf("%d\n", 0);
         }
