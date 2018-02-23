@@ -51,8 +51,10 @@ class Main {
         for (int i = 1; i<=s1_len; i++) {
             for (int j = 1; j<=s2_len; j++) {
                 for (int l = 1; l<=k; l++) {
-                    if (s1.charAt(i-1) == s2.charAt(j-1)) DP[i][j][l] = Math.max(DP[i-1][j-1][l] , DP[i-1][j-1][l-1] + (int)s1.charAt(i-1));
-                    else DP[i][j][l] = Math.max(DP[i][j-1][l], DP[i-1][j][l]);
+                    if (s1.charAt(i-1) == s2.charAt(j-1)) 
+                        DP[i][j][l] = Math.max(DP[i-1][j-1][l] , DP[i-1][j-1][l-1] + (int)s1.charAt(i-1));
+                    else 
+                        DP[i][j][l] = Math.max(DP[i][j-1][l], DP[i-1][j][l]);
                 }
             }
         }
