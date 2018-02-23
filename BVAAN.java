@@ -45,8 +45,21 @@ class Main {
         }
         return LCS[s1_len][s2_len];
     }
-
-
+    
+    //For tabulation method:
+    public static int solve(String s1, String s2, int s1_len, int s2_len, int k) {
+        for (int i = 1; i<=s1_len; i++) {
+            for (int j = 1; j<=s2_len; j++) {
+                for (int l = 1; l<=k; l++) {
+                    if (s1.charAt(i-1) == s2.charAt(j-1)) DP[i][j][l] = Math.max(DP[i-1][j-1][l] , DP[i-1][j-1][l-1] + (int)s1.charAt(i-1));
+                    else DP[i][j][l] = Math.max(DP[i][j-1][l], DP[i-1][j][l]);
+                }
+            }
+        }
+        return DP[s1_len][s2_len][k];
+    }
+    
+    //For bottom-up approach (using memoization):
     public static int solve(String s1, String s2, int i, int j, int l) {
         if(i == 0 || j == 0 || l == 0) return 0;
         if (DP[i][j][l] != 0) return DP[i][j][l];
