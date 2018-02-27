@@ -25,6 +25,8 @@ class Main {
         }
         protected int nextInt() {return Integer.parseInt(next());}
     }
+    
+    //This function is to create the longest prefix suffix array (lps), same as we create in Knuth-Morris-Pratt algorithm.
     public static int[] LPS(String str, int str_len) {
         int j=0, i=1;
         int[] lps = new int[str_len];
@@ -38,6 +40,7 @@ class Main {
         }
         return (lps);
     }
+    
     public static void main (String[] args) throws IOException {
         Reader in = new Reader(System.in);
         PrintWriter out = new PrintWriter(System.out);
