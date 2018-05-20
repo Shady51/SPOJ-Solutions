@@ -23,7 +23,7 @@ class Main {
         protected int nextInt() {return Integer.parseInt(next());}
         protected long nextLong() {return Long.parseLong(next());}
     }
-    static int[] h;
+    static int[] h; 
     static int[] c;
     private static long cost_func (int x, int n) {
         long ans = 0;
@@ -36,17 +36,11 @@ class Main {
         int t = in.nextInt();
         while (t-->0) {
             int n = in.nextInt();
-            h = new int[n];
-            c = new int[n];
-            int max_height = Integer.MIN_VALUE, min_height = Integer.MAX_VALUE;
-            for (int i = 0; i < n; i++) {
-                h[i] = in.nextInt();
-                max_height = Math.max(max_height, h[i]);
-                min_height = Math.min(min_height, h[i]);
-            }
+            h = new int[n]; c = new int[n];
+            for (int i = 0; i < n; i++) h[i] = in.nextInt();
             for (int i = 0; i < n; i++) c[i] = in.nextInt();
-            int low = min_height, high = max_height; long cost1, cost2;
-            while (low<high) {
+            int low = 0, high = 10_000; long cost1, cost2;
+            while (low<=high) {
                 int mid1 = low + (high-low)/3, mid2 = high - (high-low)/3;
                 if (mid1 == mid2) break;
                 cost1 = cost_func(mid1, n); cost2 = cost_func(mid2, n);
