@@ -1,114 +1,101 @@
 import java.io.*;
-import java.util.*;
+import java.util.StringTokenizer;
+import static java.lang.Math.*;
 
+class SegmentTree {
+    private long st[][];
+    protected SegmentTree(int n) {
+        int x = (int)(ceil(log(n)/log(2)));
+        st = new long[(1<<(x+1)) - 1][2];
+    }
+    private void updateUTIL (int sti, int sts, int ste, int qs, int qe, long val) {
+        if (st[sti][1] != 0) {
+            st[sti][0] += (ste-sts+1)*st[sti][1];
+            if (sts != ste) {
+                st[(sti<<1)|1][1] += st[sti][1];
+                st[(sti+1)<<1][1] += st[sti][1];
+            }
+            st[sti][1] = 0;
+        }
+        if (ste<qs || qe<sts) return;
+        else if (sts>=qs && ste<=qe) {
+            st[sti][0] += (ste-sts+1)*val;
+            if (sts != ste) {
+                st[(sti<<1)|1][1] += val;
+                st[(sti+1)<<1][1] += val;
+            }
+        }
+        else {
+            int mid = (sts + ste) / 2;
+            updateUTIL((sti << 1) | 1, sts, mid, qs, qe, val);
+            updateUTIL((sti + 1) << 1, mid + 1, ste, qs, qe, val);
+            st[sti][0] = st[(sti << 1) | 1][0] + st[(sti + 1) << 1][0];
+        }
+    }
+    protected void update (int n, int qs, int qe, long val) {
+        updateUTIL(0,0, n-1, qs, qe, val);
+    }
+    private long querySumUTIL (int sti, int sts, int ste, int qs, int qe) {
+        if (st[sti][1] != 0) {
+            st[sti][0] += (ste-sts+1)*st[sti][1];
+            if (sts != ste) {
+                st[(sti<<1)|1][1] += st[sti][1];
+                st[(sti+1)<<1][1] += st[sti][1];
+            }
+            st[sti][1] = 0;
+        }
+        if (ste<qs || qe<sts) return 0;
+        else if (qs<=sts && ste<=qe) return st[sti][0];
+        else {
+            int mid = (sts + ste) / 2;
+            return querySumUTIL((sti << 1) | 1, sts, mid, qs, qe) + querySumUTIL((sti + 1) << 1, mid + 1, ste, qs, qe);
+        }
+    }
+    protected long querySum (int n, int qs, int qe) {
+        return querySumUTIL(0, 0, n-1, qs, qe);
+    }
+}
 class Main {
-    static class Reader
-    {
+    static class Reader {
         private BufferedReader br;
-        private StringTokenizer stkz;
-
-        public Reader(InputStream ob)
-        {
-            br = new BufferedReader(new InputStreamReader(ob));
-            stkz = null;
+        private StringTokenizer token;
+        protected Reader(FileReader obj) {
+            br = new BufferedReader(obj, 32768);
+            token = null;
         }
-
-        public String next()
-        {
-            while (stkz == null || !stkz.hasMoreElements())
-            {
-                try
-                {
-                    stkz = new StringTokenizer(br.readLine());
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-
-            }
-            return stkz.nextToken();
+        protected Reader() {
+            br = new BufferedReader(new InputStreamReader(System.in), 32768);
+            token = null;
         }
-
-        public String nextLine()
-        {
-            String str = "";
-            try
-            {
-                str = br.readLine();
-
-            }
-            catch (IOException e)
-            {
-                e.printStackTrace();
-            }
-            return str;
+        protected String next() {
+            while(token == null || !token.hasMoreTokens()) {
+                try {
+                    token = new StringTokenizer(br.readLine());
+                } catch (Exception e) {e.printStackTrace();}
+            } return token.nextToken();
         }
-
-        public int[] nextIntArr(int n)
-        {
-            int[] arr = new int[n];
-            for(int i=0; i<n; i++){
-                arr[i] = nextInt();
-            }
-            return arr;
-        }
-
-        public int nextInt(){return Integer.parseInt(next());}
-        public long nextLong(){return Long.parseLong(next());}
+        protected int nextInt() {return Integer.parseInt(next());}
+        protected long nextLong() {return Long.parseLong(next());}
+        protected double nextDouble() {return Double.parseDouble(next());}
     }
-
-    public static long getSum (long[] BITree, int ind) {
-        int BIT_ind = ind+1;
-        long sum = 0;
-        while (BIT_ind>0) {
-            sum += BITree[BIT_ind];
-            BIT_ind = BIT_ind&(BIT_ind-1);
-        }
-        return sum;
-    }
-    
-    public static long sum (int x, long[] BIT1, long[] BIT2) {
-        return x*getSum(BIT1, x) - getSum(BIT2, x);
-    }
-    
-    public static long rangeSum (int l, int r, long[] BIT1, long[] BIT2) {
-        return sum (r, BIT1, BIT2) - sum(l-1, BIT1, BIT2);
-    }
-    
-    public static void updateBIT (long[] BIT, int n, int ind, long val) {
-        int BIT_ind = ind+1;
-        while (BIT_ind<=n) {
-            BIT[BIT_ind] += val;
-            BIT_ind += BIT_ind&(-BIT_ind);
-        }
-    }
-    
-    public static void updateRange (long[] BIT1, long[] BIT2, int n, long val, int l, int r) {
-
-        updateBIT(BIT1, n, l, val);
-        updateBIT(BIT1, n, r+1, -val);
-
-        updateBIT(BIT2, n, l, val*(l-1));
-        updateBIT(BIT2, n, r+1, -val*r);
-    }
-    
-    public static void main(String[] args) throws Exception {
-        Reader in = new Reader(System.in);
+    public static void main(String[] args) throws IOException {
+        Reader in = new Reader();
         PrintWriter out = new PrintWriter(System.out);
         int t = in.nextInt();
         while (t-->0) {
             int n = in.nextInt(), c = in.nextInt();
-            long[] BIT1 = new long[n+1];
-            long[] BIT2 = new long[n+1];
-            while (c-->0) {
+            SegmentTree tree = new SegmentTree(n);
+            while (c-->0){
                 int type = in.nextInt();
                 if (type == 0) {
-                    int l = in.nextInt()-1, r = in.nextInt()-1;
+                    int qs = in.nextInt()-1, qe = in.nextInt()-1;
                     long val = in.nextInt();
-                    updateRange(BIT1, BIT2, n, val, l, r);
+                    tree.update(n, qs, qe, val);
                 }
-                else out.printf("%d\n", rangeSum(in.nextInt()-1, in.nextInt()-1, BIT1, BIT2));
+                else {
+                    int qs = in.nextInt()-1, qe = in.nextInt()-1;
+                    out.printf("%d\n", tree.querySum(n, qs, qe));
+                }
             }
         }
         out.close();
